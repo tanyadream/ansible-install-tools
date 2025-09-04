@@ -1,0 +1,10 @@
+- name: Check Docker installed
+  command: docker --version
+  register: docker_check
+  changed_when: false
+  failed_when: docker_check.rc != 0
+
+- name: Assert Docker is working
+  assert:
+    that:
+      - "'Docker version' in docker_check.stdout"

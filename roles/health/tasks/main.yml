@@ -1,0 +1,27 @@
+- name: check if Docker started
+  shell: systemctl is-active docker
+  register: docker_status
+  changed_when: false
+  failed_when: docker_status.stdout != "active"
+
+- name: check if Nginx started
+  shell: systemctl is-active nginx
+  register: nginx_status
+  changed_when: false
+  failed_when: nginx_status.stdout != "active"
+
+- name: check if Docker started (docker ps)
+  shell: docker ps
+  register: docker_ps
+  changed_when: false
+  failed_when: docker_ps.rc != 0
+
+- name: check if port 80 open (Nginx)
+  uri:
+    url: http://localhost
+    return_content: no
+    status_code: 200
+  register: nginx_port_check
+  retries: 3
+  delay: 5
+  until: nginx_port_check.status == 200

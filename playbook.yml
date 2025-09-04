@@ -1,0 +1,10 @@
+- name: Install DevOps tools
+  hosts: all
+  become: true
+  roles:
+    - common
+    - docker
+    - nginx
+    - go
+    - pip
+    - health
