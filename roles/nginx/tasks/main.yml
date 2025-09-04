@@ -1,0 +1,20 @@
+---
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Ensure Nginx is running
+  service:
+    name: nginx
+    state: started
+    enabled: true
+
+- name: Check Nginx port 80
+  uri:
+    url: http://localhost
+    status_code: 200
+  register: nginx_check
+  retries: 3
+  delay: 5
+  until: nginx_check.status == 200

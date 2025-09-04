@@ -1,0 +1,7 @@
+docker_version: ""
+docker_repo_arch: "amd64"
+docker_key_path: "/etc/apt/keyrings/docker.asc"
+docker_repo_base: "https://download.docker.com/linux"
+docker_repo_os: "{{ ansible_distribution | lower }}"
+docker_repo_dist: "{{ ansible_distribution_release | lower }}"
+

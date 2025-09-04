@@ -1,10 +1,16 @@
-- name: Update package cache
+---
+- name: Update apt cache
   apt:
     update_cache: yes
-  when: ansible_os_family == "Debian"
 
-- name: Install EPEL (CentOS)
-  yum:
-    name: epel-release
+- name: Install base packages
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - software-properties-common
+      - python3-pip
     state: present
-  when: ansible_os_family == "RedHat"
+
