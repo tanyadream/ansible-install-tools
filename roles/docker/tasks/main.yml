@@ -1,8 +1,5 @@
 ---
 
-- name: Reset docker_version
-  set_fact:
-    docker_version: ""
 - name: Remove legacy Docker sources
   file:
     path: /etc/apt/sources.list.d/docker.list
